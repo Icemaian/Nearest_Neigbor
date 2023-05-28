@@ -50,7 +50,7 @@ class NearestNeighborIndex:
         for point in self.points:
             deltax = point[0] - query_point[0]
             deltay = point[1] - query_point[1]
-            dist = math.sqrt(deltax * deltax + deltay * deltay)
+            dist = (deltax * deltax + deltay * deltay)
             if min_dist is None or dist < min_dist:
                 min_dist = dist
                 min_point = point
