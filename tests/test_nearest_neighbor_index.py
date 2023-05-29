@@ -19,12 +19,12 @@ class NearestNeighborIndexTest(unittest.TestCase):
             (1, 0),
             (10, 5),
             (-1000, 20),
-        
             (3.14159, 42),
             (42, 3.14159),
         ]
 
         uut = NearestNeighborIndex(test_points)
+        
         self.assertEqual((1, 0), uut.find_nearest((0, 0)))
         self.assertEqual((-1000, 20), uut.find_nearest((-2000, 0)))
         self.assertEqual((42, 3.14159), uut.find_nearest((40, 3)))
