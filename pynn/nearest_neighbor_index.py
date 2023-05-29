@@ -4,7 +4,8 @@ from .kd_tree import KDTree
 
 class NearestNeighborIndex:
     """
-    TODO give me a decent comment
+    Given the array two dimensional points, we sort them into a KD-tree from the kd_tree module in this directory.
+    The tree allows us to quickly determine the nearest neighbor with the minimal number of index traversals
 
     NearestNeighborIndex is intended to index a set of provided points to provide fast nearest
     neighbor lookup. For now, it is simply a stub that performs an inefficient traversal of all
@@ -40,10 +41,11 @@ class NearestNeighborIndex:
 
     def find_nearest_fast(self, query_point):
         """
-        TODO: Re-implement me with your faster solution.
-
         find_nearest_fast returns the point that is closest to query_point. If there are no indexed
         points, None is returned.
+
+        uses two dimensional KD-tree to sort the provided array. Once sorted we store the tree for re-use and use a
+        nearest neighbor search to traverse the tree
         """
 
         min_dist = None
@@ -52,21 +54,13 @@ class NearestNeighborIndex:
             self.kdTree = KDTree()
             for point in self.points:
                 self.kdTree.insert(point)
-
-        #for point in self.points:
-        #    deltax = point[0] - query_point[0]
-        #    deltay = point[1] - query_point[1]
-        #    dist = (deltax * deltax + deltay * deltay)
-        #    if min_dist is None or dist < min_dist:
-        #        min_dist = dist
-        #        min_point = point
-
+        
         result = self.kdTree.findNearestPoint(query_point)
 
         if result.v is not None:
             return result.v
         else:
-            return result
+            return None
 
     def find_nearest(self, query_point):
         """
