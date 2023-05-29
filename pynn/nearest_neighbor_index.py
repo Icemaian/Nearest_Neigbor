@@ -1,5 +1,6 @@
 import math
 
+from .kd_tree import KDTree
 
 class NearestNeighborIndex:
     """
@@ -15,6 +16,7 @@ class NearestNeighborIndex:
         takes an array of 2d tuples as input points to be indexed.
         """
         self.points = points
+        self.kdTree = None
 
     @staticmethod
     def find_nearest_slow(query_point, haystack):
@@ -46,16 +48,25 @@ class NearestNeighborIndex:
 
         min_dist = None
         min_point = None
+        if self.kdTree == None:
+            self.kdTree = KDTree()
+            for point in self.points:
+                self.kdTree.insert(point)
 
-        for point in self.points:
-            deltax = point[0] - query_point[0]
-            deltay = point[1] - query_point[1]
-            dist = (deltax * deltax + deltay * deltay)
-            if min_dist is None or dist < min_dist:
-                min_dist = dist
-                min_point = point
+        #for point in self.points:
+        #    deltax = point[0] - query_point[0]
+        #    deltay = point[1] - query_point[1]
+        #    dist = (deltax * deltax + deltay * deltay)
+        #    if min_dist is None or dist < min_dist:
+        #        min_dist = dist
+        #        min_point = point
 
-        return min_point
+        result = self.kdTree.findNearestPoint(query_point)
+
+        if result.v is not None:
+            return result.v
+        else:
+            return result
 
     def find_nearest(self, query_point):
         """
