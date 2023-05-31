@@ -59,8 +59,22 @@ class NearestNeighborIndexTest(unittest.TestCase):
             actual.append(uut.find_nearest(query_point))
         new_time = time.time() - start
 
-        print(f"slow time: {slow_time:0.2f}sec")
+        print(f"\nslow time: {slow_time:0.2f}sec")
         print(f"new time: {new_time:0.2f}sec")
         print(f"speedup: {(slow_time / new_time):0.2f}x")
+    
+    def test_valid_input(self):
+        """
+        test to ensure if a point is passed in it allerts the user and continues processing the data.
+        """
 
-    # TODO: Add more test cases to ensure your index works in different scenarios
+        test_points = [('x','200'),('200','5000'),('0x000034', 'Hello World'),(5,'30'), (5,30)]
+        print("\nShould show error messages for non-supported data types")
+        uut = NearestNeighborIndex(test_points)
+        
+        self.assertEqual((None), uut.find_nearest(('x',200)))        
+        self.assertEqual((None), uut.find_nearest(('200','5000'))) 
+        self.assertEqual((None), uut.find_nearest(('0','0'))) 
+        self.assertEqual((None), uut.find_nearest((5,'30'))) 
+
+        self.assertEqual((5,30), uut.find_nearest((5,30)))

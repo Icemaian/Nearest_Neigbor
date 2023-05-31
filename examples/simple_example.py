@@ -1,6 +1,16 @@
+"""
+For a Guided search through data run "python near-neighbor_app.py"
+This will alow you to copy and paste in a list of data or load in a comma seperated list of points.
+For exact syntax look at the mock_data.csv file in the examples folder
+"""
 
-# Please create a simple example use of the pynn library for your end user. Assume that the end
-# user knows a lot about their subject matter but has only a basic understanding of Python.
 
-# Meaningful examples may include reading a file, finding a few nearby points and writing them
-# out to the console.
+"""
+For a cli use, from directory of the pynn library run the follwowing commands.
+python
+from pynn import NearestNeighborIndex
+uut = NearestNeighborIndex(["data to be inserted", "must be float or int and follow tuple syntax"), (5,5), (-4,0)])
+uut.find_nearest((0,0)) #or whatever point you are looking for
+This syntax can also be used when importing into other python files
+"""
+

@@ -14,7 +14,9 @@ class KDTree:
     A K-dimensional tree, similiar to a binary tree but utuilizes alternating dimensions at each level of the tree.
     This tree starts at with x dimension for the first height layer, then alternates with the y dimension.
     
-    This class includes a KD tree, insert, findnearestPoint, and some other functions to be utuilized within
+    This class includes a KD tree, insert, findnearestPoint, and along with some functions used to travers the tree.
+    Class is based off of Andre Violentyev's Java KD-tree implementation, Given the scope of data and the multiple dimensions a KD tree implentation feels appropriate. 
+    Andre's video: https://www.youtube.com/watch?v=Glp7THUpGow
     """
 
     def __init__(self): # Creates a completely empty tree
@@ -22,7 +24,9 @@ class KDTree:
         self.height = 0
 
     def findNearestPoint(self, val): # Public function to find the nearest point to the val point
-        if self.root is None:
+        if isinstance(val[0], (int, float)) is False or isinstance(val[1], (int, float)) is False:
+            print("Error: X and or Y value is not of type int or float. Not searching for: ", val) 
+        elif self.root is None:
             return None
         else:
             return self._findNearestPoint(val, self.root, 1)
@@ -62,7 +66,9 @@ class KDTree:
         return best
 
     def insert(self, val): # Public Insert for KD-tree
-        if self.root is None:
+        if isinstance(val[0], (int, float)) is False or isinstance(val[1], (int, float)) is False:
+            print("Error: X and or Y value is not of type int or float. Not inserting: ", val) 
+        elif self.root is None:
             self.root = Node(val)
             self.height += 1
         else:

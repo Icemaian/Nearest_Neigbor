@@ -57,7 +57,7 @@ class NearestNeighborIndex:
         
         result = self.kdTree.findNearestPoint(query_point)
 
-        if result.v is not None:
+        if type(result) is not type(None):
             return result.v
         else:
             return None
